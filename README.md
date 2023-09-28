@@ -9,9 +9,17 @@ Generate a username and password hashed wihth bcrypt. Output the admin:hashed pa
 
 #### How to run
 
-Start traefik `npm run traefik`, run `npm run traefik:down` to stop  
-Start admin `npm run admin`, run `npm run admin:down` to stop  
-Start services `npm run services`, run `npm run services:down` to stop
+###### Traefik
+Start `npm run traefik`  
+Stop  `npm run traefik:down`  
+
+###### Admin
+Start `npm run admin`  
+Stop  `npm run admin:down`  
+
+###### Services
+Start `npm run services`  
+Stop  `npm run services:down`  
 
 
 ### TODO ✓
