@@ -7,6 +7,11 @@ Generate a username and password hashed wihth bcrypt. Output the admin:hashed pa
 
 `$(htpasswd -nbB USER "PASS") | sed -e s/\\$/\\$\\$/g`
 
+#### How to run
+
+Start traefik `npm run traefik`, run `npm run traefik:down` to stop  
+Start admin `npm run admin`, run `npm run admin:down` to stop  
+Start services `npm run services`, run `npm run services:down` to stop
 
 
 #### Todo
