@@ -7,9 +7,12 @@ services:
       - "--api.dashboard=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=backend"
       - "--entrypoints.web.address=:80"
     ports:
       - "80:80"
+    networks:
+      - backend
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     labels:
@@ -24,21 +27,62 @@ services:
 
   whoami:
     image: containous/whoami
+    networks:
+      - backend
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`localhost`) && PathPrefix(`/whoami`)"
       - "traefik.http.routers.whoami.entrypoints=web"
 
-  admin:
+  admin_pb:
     build:
       context: .
       dockerfile: Dockerfile.pocketbase
     ports:
       - "8080:8080"
+    networks:
+      - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.admin_pb.rule=Host(`localhost`) && PathPrefix(`/admin_pb`)"  # Match the path prefix /admin
+      - "traefik.http.routers.admin_pb.entrypoints=web"
+      - "traefik.http.middlewares.admin_pb-stripprefix.stripprefix.prefixes=/admin_pb"  # Strip /admin prefix
+      - "traefik.http.routers.admin_pb.middlewares=admin_pb-stripprefix"  # Apply the middleware
+      - "traefik.http.services.admin_pb.loadbalancer.server.port=8080"  # Specify the backend port
+
+  admin:
+    build:
+      context: ./admin_bun
+      dockerfile: Dockerfile
+    networks:
+      - backend
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.admin.rule=Host(`localhost`) && PathPrefix(`/admin`)"  # Match the path prefix /admin
       - "traefik.http.routers.admin.entrypoints=web"
       - "traefik.http.middlewares.admin-stripprefix.stripprefix.prefixes=/admin"  # Strip /admin prefix
       - "traefik.http.routers.admin.middlewares=admin-stripprefix"  # Apply the middleware
-      - "traefik.http.services.admin.loadbalancer.server.port=8080"  # Specify the backend port
+      - "traefik.http.services.admin.loadbalancer.server.port=8081"  # Specify the backend port
+    depends_on:
+      - admin_pb
+
+
+#  admin:
+#    build:
+#      context: ./admin_3
+#      dockerfile: Dockerfile
+#    networks:
+#      - backend
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.http.routers.admin.rule=Host(`localhost`) && PathPrefix(`/admin`)"  # Match the path prefix /admin
+#      - "traefik.http.routers.admin.entrypoints=web"
+#      - "traefik.http.middlewares.admin-stripprefix.stripprefix.prefixes=/admin"  # Strip /admin prefix
+#      - "traefik.http.routers.admin.middlewares=admin-stripprefix"  # Apply the middleware
+#      - "traefik.http.services.admin.loadbalancer.server.port=8081"  # Specify the backend port
+#    depends_on:
+#     - admin_pb
+
+
+networks:
+  backend:
