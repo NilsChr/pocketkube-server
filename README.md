@@ -15,7 +15,14 @@ Start services `npm run services`, run `npm run services:down` to stop
 
 
 ### TODO ✓
-- [ ] FIX - start all services on startup  
+- [ ] Start all services on startup  
+- [ ] Test deployment on linode
+- [ ] Create interface for managing apps
+    - [ ] Use Traefik Basic Auth?
+- [ ] Setup variables for root admin in pocketbase
+
+
+
 
 ### DONE ✓
 - [x] docker volumes for PB_data  
