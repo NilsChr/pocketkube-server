@@ -3,15 +3,11 @@ import eventsource from "eventsource";
 //@ts-ignore
 global.EventSource = eventsource;
 import PocketBase from "pocketbase";
-import { RecordModel } from "pocketbase";
 import axios from "axios";
-const Docker = require("dockerode");
-import * as fs from "fs";
+import * as yaml from "js-yaml";
+import generateCompose from "./generateCompose";
 
-console.log("Hello via Bun!");
-
-const docker = new Docker({ host: "http://localhost", port: 2375 });
-
+const composeFilePath = "./output/docker-compose.services.yml";
 const pb_url = "http://admin_pb:8080";
 const pb = new PocketBase(pb_url);
 
@@ -76,9 +72,9 @@ async function main() {
 
     generateOutput();
   });
+  await generateOutput();
 }
 await main();
-
 
 async function setupRootAdmin() {
   const url = `${pb_url}/api/admins`;
@@ -100,5 +96,13 @@ async function setupRootAdmin() {
 }
 
 async function generateOutput() {
-    console.log('generating output');
+  console.log("generating output");
+
+  const records = await pb.collection("backends").getFullList({
+    sort: "-title"
+  });
+
+  const obj = generateCompose(records.map((r) => r.title));
+  const yamlData = yaml.dump(obj);
+  await Bun.write(composeFilePath, yamlData);
 }

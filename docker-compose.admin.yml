@@ -9,6 +9,8 @@ services:
       - "8080:8080"
     networks:
       - backend
+    volumes: 
+      - ./data/admin:/pb/pb_data
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.admin_pb.rule=Host(`localhost`) && PathPrefix(`/admin_pb`)"  # Match the path prefix /admin
@@ -24,6 +26,8 @@ services:
       dockerfile: Dockerfile
     networks:
       - backend
+    volumes: 
+      - ./data/.compose:/admin/output
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.admin.rule=Host(`localhost`) && PathPrefix(`/admin`)"  # Match the path prefix /admin

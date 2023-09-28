@@ -1,13 +1,11 @@
 FROM ubuntu:22.04
-WORKDIR /admin_service
+WORKDIR /admin
 
 # Install nginx 
 RUN apt-get update && apt-get install -y unzip && apt-get clean
 
 # Install curl
 RUN apt-get update && apt-get install -y curl && apt-get clean
-
-
 
 # Install bun
 # RUN curl -fsSL https://bun.sh/install | bash
