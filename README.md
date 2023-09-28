@@ -9,20 +9,20 @@ Generate a username and password hashed wihth bcrypt. Output the admin:hashed pa
 
 #### How to run
 
-###### Traefik
+##### Traefik
 Start `npm run traefik`  
 Stop  `npm run traefik:down`  
 
-###### Admin
+##### Admin
 Start `npm run admin`  
 Stop  `npm run admin:down`  
 
-###### Services
+##### Services
 Start `npm run services`  
 Stop  `npm run services:down`  
 
 
-### TODO ✓
+#### TODO ✓
 - [ ] Start all services on startup  
 - [ ] Test deployment on linode
 - [ ] Create interface for managing apps
@@ -32,7 +32,7 @@ Stop  `npm run services:down`
 
 
 
-### DONE ✓
+#### DONE ✓
 - [x] docker volumes for PB_data  
 - [x] containers always restart  
 - [x] Create service which generates the docker-compose file
