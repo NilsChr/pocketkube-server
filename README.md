@@ -23,6 +23,9 @@ Stop  `npm run services:down`
 
 
 #### TODO ✓
+- [ ] What to do when an app is deleted?
+- [ ] How to handle duplicate app names?
+- [ ] Minikube?
 - [ ] Start all services on startup  
 - [ ] Test deployment on linode
 - [ ] Create interface for managing apps
@@ -48,3 +51,10 @@ rm  ~/.docker/config.json
 Error
 `open /Users/nils/.docker/buildx/current: permission denied`
 Solution `sudo chown -R nils ~/.docker`
+
+
+
+### Future features
+
+Automatic stop and star containers if not active
+https://acouvreur.github.io/sablier/#/
