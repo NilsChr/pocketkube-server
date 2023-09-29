@@ -44,7 +44,7 @@ Stop  `npm run services:down`
 - [x] Docker volumes for PB_data  
 - [x] Containers always restart  
 - [x] Create service which generates the docker-compose file
-- [x] Create a service "admin" which serves as the backend admins
+- [x] Create a service "admin" which serves as the backend admin
 - [x] Containers always restart  
 - [x] Setup env variables for root project folder
 - [x] Setup env variables for root admin in pocketbase
