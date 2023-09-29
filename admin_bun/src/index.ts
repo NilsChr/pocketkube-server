@@ -11,6 +11,9 @@ const composeFilePath = "./output/docker-compose.services.yml";
 const pb_url = "http://admin:8080";
 const pb = new PocketBase(pb_url);
 
+console.log('PASS', process.env || 'no password found');
+
+
 async function main() {
   await setupRootAdmin();
   const adminData = await pb.admins.authWithPassword(
@@ -79,9 +82,9 @@ await main();
 async function setupRootAdmin() {
   const url = `${pb_url}/api/admins`;
   const payload = {
-    email: "admin@admin.com",
-    password: "1234567890",
-    passwordConfirm: "1234567890"
+    email: process.env.ROOTADMIN,
+    password: process.env.ROOTADMINPW,
+    passwordConfirm: process.env.ROOTADMINPW,
   };
 
   try {

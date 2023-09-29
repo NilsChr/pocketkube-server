@@ -8,6 +8,6 @@
     "admin": "docker-compose -f docker-compose.admin.yml up -d --build",
     "admin:down": "docker-compose -f docker-compose.admin.yml down",
     "services": "docker-compose -f docker-compose.services.yml up -d --build",
-    "services:down": "docker-compose -f ./data/.compose/docker-compose.services.yml down"
+    "services:down": "docker-compose -f docker-compose.services.yml down"
   }
 }

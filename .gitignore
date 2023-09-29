@@ -1,3 +1,4 @@
 letsencrypt
 data/*
 !data/.gitkeep
+.env

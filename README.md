@@ -30,17 +30,19 @@ Stop  `npm run services:down`
 - [ ] Test deployment on linode
 - [ ] Create interface for managing apps
     - [ ] Use Traefik Basic Auth?
-- [ ] Setup variables for root admin in pocketbase
 
 
 
 
 #### DONE ✓
-- [x] docker volumes for PB_data  
-- [x] containers always restart  
+- [x] Docker volumes for PB_data  
+- [x] Containers always restart  
 - [x] Create service which generates the docker-compose file
 - [x] Create a service "admin" which serves as the backend admins
-- [x] containers always restart  
+- [x] Containers always restart  
+- [x] Setup env variables for root project folder
+- [x] Setup env variables for root admin in pocketbase
+- [x] Setup env variables
 
 
 

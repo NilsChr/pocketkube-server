@@ -7,5 +7,5 @@ fswatch -0 "$file_to_watch" | while read -d "" change; do
     echo "File $file_to_watch has been modified."
     cp $file_to_watch docker-compose.services.yml
     # docker-compose -f docker-compose.services.yml down
-    docker-compose -f docker-compose.services.yml up -d --build
+    docker-compose --env-file .env -f docker-compose.services.yml up -d --build
 done

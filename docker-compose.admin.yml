@@ -5,12 +5,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.pocketbase
+    env_file:
+      - .env
     ports:
       - "8080:8080"
     networks:
       - backend
     volumes: 
-      - /Users/nils/Documents/workspace/pocketbase/pocketbaseTraefik/data/admin:/pb/pb_data
+       - ${PROJECT}/data/admin:/pb/pb_data
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.admin.rule=Host(`localhost`) && PathPrefix(`/admin`)"  # Match the path prefix /admin
@@ -24,6 +26,8 @@ services:
     build:
       context: ./admin_bun
       dockerfile: Dockerfile
+    env_file:
+      - .env
     networks:
       - backend
     volumes: 
