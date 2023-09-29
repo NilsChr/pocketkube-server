@@ -1,3 +1,8 @@
+# Pocketkube
+
+![](./architecture.png)
+
+
 ### Traefik docs
 https://doc.traefik.io/traefik/v2.10/operations/api/
 
