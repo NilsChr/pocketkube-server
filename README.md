@@ -1,4 +1,5 @@
 # Pocketkube
+A small service for hosting several pocketbase instances in the same environment.
 
 ![](./architecture.png)
 
