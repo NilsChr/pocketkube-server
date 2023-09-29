@@ -38,3 +38,13 @@ Stop  `npm run services:down`
 - [x] Create service which generates the docker-compose file
 - [x] Create a service "admin" which serves as the backend admins
 - [x] containers always restart  
+
+
+
+
+#### Troubleshooting
+rm  ~/.docker/config.json
+
+Error
+`open /Users/nils/.docker/buildx/current: permission denied`
+Solution `sudo chown -R nils ~/.docker`

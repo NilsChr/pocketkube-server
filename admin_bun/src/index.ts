@@ -8,7 +8,7 @@ import * as yaml from "js-yaml";
 import generateCompose from "./generateCompose";
 
 const composeFilePath = "./output/docker-compose.services.yml";
-const pb_url = "http://admin_pb:8080";
+const pb_url = "http://admin:8080";
 const pb = new PocketBase(pb_url);
 
 async function main() {
@@ -18,11 +18,11 @@ async function main() {
     "1234567890"
   );
   const collections = await pb.collections.getFullList({ sort: "-created" });
-  console.log("Got Collections");
-  console.log(collections);
+  //console.log("Got Collections");
+  //console.log(collections);
   const backendSchemaExists =
     collections.filter((c) => c.name === "backends")[0] || null;
-  console.log("backendSchemaExists", backendSchemaExists);
+  //console.log("backendSchemaExists", backendSchemaExists);
   if (backendSchemaExists === null) {
     console.log("Creating schema: backends");
     await pb.collections.create({
@@ -91,7 +91,8 @@ async function setupRootAdmin() {
       }
     });
   } catch (error) {
-    console.error("Error:", error);
+    console.log('Error when creating root admin');
+    //console.error("Error:", error);
   }
 }
 
@@ -104,5 +105,6 @@ async function generateOutput() {
 
   const obj = generateCompose(records.map((r) => r.title));
   const yamlData = yaml.dump(obj);
+  console.log(yamlData)
   await Bun.write(composeFilePath, yamlData);
 }

@@ -1,5 +1,5 @@
 FROM ubuntu:22.04
-WORKDIR /admin
+WORKDIR /admin_service
 
 # Install nginx 
 RUN apt-get update && apt-get install -y unzip && apt-get clean

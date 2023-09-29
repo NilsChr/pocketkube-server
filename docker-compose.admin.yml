@@ -1,6 +1,6 @@
 version: "3.3"
 services:
-  admin_pb:
+  admin:
     restart: always
     build:
       context: .
@@ -10,16 +10,16 @@ services:
     networks:
       - backend
     volumes: 
-      - ./data/admin:/pb/pb_data
+      - /Users/nils/Documents/workspace/pocketbase/pocketbaseTraefik/data/admin:/pb/pb_data
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.admin_pb.rule=Host(`localhost`) && PathPrefix(`/admin_pb`)"  # Match the path prefix /admin
-      - "traefik.http.routers.admin_pb.entrypoints=web"
-      - "traefik.http.middlewares.admin_pb-stripprefix.stripprefix.prefixes=/admin_pb"  # Strip /admin prefix
-      - "traefik.http.routers.admin_pb.middlewares=admin_pb-stripprefix"  # Apply the middleware
-      - "traefik.http.services.admin_pb.loadbalancer.server.port=8080"  # Specify the backend port
+      - "traefik.http.routers.admin.rule=Host(`localhost`) && PathPrefix(`/admin`)"  # Match the path prefix /admin
+      - "traefik.http.routers.admin.entrypoints=web"
+      - "traefik.http.middlewares.admin-stripprefix.stripprefix.prefixes=/admin"  # Strip /admin prefix
+      - "traefik.http.routers.admin.middlewares=admin-stripprefix"  # Apply the middleware
+      - "traefik.http.services.admin.loadbalancer.server.port=8080"  # Specify the backend port
 
-  admin:
+  admin_service:
     restart: always
     build:
       context: ./admin_bun
@@ -27,16 +27,16 @@ services:
     networks:
       - backend
     volumes: 
-      - ./data/.compose:/admin/output
+      - /Users/nils/Documents/workspace/pocketbase/pocketbaseTraefik/data/.compose:/admin_service/output
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.admin.rule=Host(`localhost`) && PathPrefix(`/admin`)"  # Match the path prefix /admin
-      - "traefik.http.routers.admin.entrypoints=web"
-      - "traefik.http.middlewares.admin-stripprefix.stripprefix.prefixes=/admin"  # Strip /admin prefix
-      - "traefik.http.routers.admin.middlewares=admin-stripprefix"  # Apply the middleware
-      - "traefik.http.services.admin.loadbalancer.server.port=8081"  # Specify the backend port
+      - "traefik.http.routers.admin_service.rule=Host(`localhost`) && PathPrefix(`/admin_service`)"  # Match the path prefix /admin
+      - "traefik.http.routers.admin_service.entrypoints=web"
+      - "traefik.http.middlewares.admin_service-stripprefix.stripprefix.prefixes=/admin_service"  # Strip /admin prefix
+      - "traefik.http.routers.admin_service.middlewares=admin_service-stripprefix"  # Apply the middleware
+      - "traefik.http.services.admin_service.loadbalancer.server.port=8081"  # Specify the backend port
     depends_on:
-      - admin_pb
+      - admin
 
 networks:
   backend:
