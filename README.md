@@ -48,11 +48,11 @@ Stop  `npm run services:down`
 
 
 #### Troubleshooting
-rm  ~/.docker/config.json
+rm  ~/.docker/config.json  
 
-Error
-`open /Users/nils/.docker/buildx/current: permission denied`
-Solution `sudo chown -R nils ~/.docker`
+Error  
+`open /Users/nils/.docker/buildx/current: permission denied`  
+Solution `sudo chown -R nils ~/.docker`  
 
 
 
