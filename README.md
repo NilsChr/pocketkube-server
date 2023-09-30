@@ -1,6 +1,23 @@
 # Pocketkube
 A small service for hosting several pocketbase instances in the same environment.
 
+
+### Getting started
+Fill inn environment variables in .env
+
+cd into project folder and run:  
+`chmod +x ./addAuthToTraefik.sh && chmod +x ./stop_containers.sh && chmod +x ./start_containers.sh && chmod +x ./monitor.sh`  
+
+#### Build and start containers
+`./start_containers.sh`  
+Add a username and password for you traefik dashboard when prompted.  
+Visit your host at host/admin/_/ for admin dashboard.  
+Add entry to "backends" table.  
+Visit your host to see your Traefik Dashboard. Validate that your new service is running at host/<app_title>  
+Go to host/<app_title>/_/ to access Pocketbase dashboard.  
+
+
+
 ![](./architecture.png)
 
 
@@ -29,14 +46,16 @@ Stop  `npm run services:down`
 
 
 #### TODO ✓
-- [ ] What to do when an app is deleted?
-- [ ] How to handle duplicate app names?
-- [ ] Minikube?
+- [ ] How to handle duplicate app names?  ---- Don't generate ID -> use title as ID?
 - [ ] Start all services on startup  
 - [ ] Test deployment on linode
 - [ ] Create interface for managing apps
+    - [ ] Design UI
+    - [ ] System Architecture
     - [ ] Use Traefik Basic Auth?
 
+
+#### In Progress
 
 
 
@@ -49,8 +68,14 @@ Stop  `npm run services:down`
 - [x] Setup env variables for root project folder
 - [x] Setup env variables for root admin in pocketbase
 - [x] Setup env variables
+- [x] What to do when an app is deleted?
+    - [x] Make volume folders named after ID instead of tile
+    - [x] Ensure access to projects_data from admin
+    - [x] Rename ID folder to DELETED_ID_TITLE
 
 
+#### Not going to implement yet
+- [ ] Minikube?
 
 
 #### Troubleshooting

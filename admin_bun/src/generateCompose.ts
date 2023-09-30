@@ -9,6 +9,7 @@ const baseCompose = {
 };
 
 function addService(
+  id: string,
   title: string,
   entrypoint: "web" | "websecure",
   port: number
@@ -21,9 +22,9 @@ function addService(
     },
     ports: [`${port}:8080`],
     networks: ["backend"],
-    //volumes: [`./data/${title}:/pb/pb_data`],
     volumes: [`\${PROJECT}/data/${title}:/pb/pb_data`],
     labels: [
+      `com.pocketkube`,
       `traefik.enable=true`,
       `traefik.http.routers.${title}.rule=Host(\`localhost\`) && PathPrefix(\`/${title}\`)`,
       `traefik.http.routers.${title}.entrypoints=\${ENTRYPOINTS}`,
@@ -34,11 +35,11 @@ function addService(
   };
 }
 
-export default function generateCompose(apps: string[]): any {
+export default function generateCompose(apps: {id: string, title:string}[]): any {
   const template = JSON.parse(JSON.stringify(baseCompose));
   let port = 9000;
-  for (let title of apps) {
-    template["services"][title] = addService(title, "web", port++);
+  for (let app of apps) {
+    template["services"][app.id] = addService(app.id, app.title, "web", port++);
   }
 
   return template;

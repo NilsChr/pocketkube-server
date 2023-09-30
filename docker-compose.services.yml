@@ -1,42 +1,4 @@
 version: '3.3'
-services:
-  myapp:
-    restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile.pocketbase
-    ports:
-      - '9000:8080'
-    networks:
-      - backend
-    volumes:
-      - ${PROJECT}/data/myapp:/pb/pb_data
-    labels:
-      - traefik.enable=true
-      - >-
-        traefik.http.routers.myapp.rule=Host(`localhost`) &&
-        PathPrefix(`/myapp`)
-      - traefik.http.routers.myapp.entrypoints=${ENTRYPOINTS}
-      - traefik.http.middlewares.myapp-stripprefix.stripprefix.prefixes=/myapp
-      - traefik.http.routers.myapp.middlewares=myapp-stripprefix
-      - traefik.http.services.myapp.loadbalancer.server.port=8080
-  lol:
-    restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile.pocketbase
-    ports:
-      - '9001:8080'
-    networks:
-      - backend
-    volumes:
-      - ${PROJECT}/data/lol:/pb/pb_data
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.lol.rule=Host(`localhost`) && PathPrefix(`/lol`)
-      - traefik.http.routers.lol.entrypoints=${ENTRYPOINTS}
-      - traefik.http.middlewares.lol-stripprefix.stripprefix.prefixes=/lol
-      - traefik.http.routers.lol.middlewares=lol-stripprefix
-      - traefik.http.services.lol.loadbalancer.server.port=8080
+services: {}
 networks:
   backend: null

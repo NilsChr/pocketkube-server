@@ -31,7 +31,8 @@ services:
     networks:
       - backend
     volumes: 
-      - /Users/nils/Documents/workspace/pocketbase/pocketbaseTraefik/data/.compose:/admin_service/output
+      - ${PROJECT}/data/.compose:/admin_service/output
+      - ${PROJECT}/data/:/pb_instances/
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.admin_service.rule=Host(`localhost`) && PathPrefix(`/admin_service`)"  # Match the path prefix /admin

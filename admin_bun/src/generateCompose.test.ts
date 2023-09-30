@@ -6,7 +6,7 @@ test("2 + 2", () => {
 });
 
 test("Should generate YAML", () => {
-  const output = generateCompose(["app1", "app2"]);
+  const output = generateCompose([{id: '1', title: 'app1'},{id: '2', title: 'app2'}]);
   expect(output?.services?.app1).not.toBe(undefined);
   expect(output?.services?.app2).not.toBe(undefined);
 });

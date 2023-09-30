@@ -17,7 +17,6 @@ services:
       - backend
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "${PROJECT}/data/.traefik:/users"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.rule=Host(`localhost`)"
@@ -25,7 +24,7 @@ services:
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.middlewares=myauth"
       - "traefik.http.middlewares.myauth.basicauth.removeheader=true"
-      - "traefik.http.middlewares.myauth.basicauth.usersfile=/users/userfile"
+      - "traefik.http.middlewares.myauth.basicauth.users=${BASICAUTH}"
 
   whoami:
     image: containous/whoami
