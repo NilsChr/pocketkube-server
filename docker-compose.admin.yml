@@ -16,7 +16,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.admin.rule=Host(`localhost`) && PathPrefix(`/admin`)"  # Match the path prefix /admin
-      - "traefik.http.routers.admin.entrypoints=web"
+      - "traefik.http.routers.admin.entrypoints=${ENTRYPOINTS}"
       - "traefik.http.middlewares.admin-stripprefix.stripprefix.prefixes=/admin"  # Strip /admin prefix
       - "traefik.http.routers.admin.middlewares=admin-stripprefix"  # Apply the middleware
       - "traefik.http.services.admin.loadbalancer.server.port=8080"  # Specify the backend port
@@ -35,7 +35,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.admin_service.rule=Host(`localhost`) && PathPrefix(`/admin_service`)"  # Match the path prefix /admin
-      - "traefik.http.routers.admin_service.entrypoints=web"
+      - "traefik.http.routers.admin_service.entrypoints=${ENTRYPOINTS}"
       - "traefik.http.middlewares.admin_service-stripprefix.stripprefix.prefixes=/admin_service"  # Strip /admin prefix
       - "traefik.http.routers.admin_service.middlewares=admin_service-stripprefix"  # Apply the middleware
       - "traefik.http.services.admin_service.loadbalancer.server.port=8081"  # Specify the backend port

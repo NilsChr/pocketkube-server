@@ -3,6 +3,8 @@ services:
   traefik:
     image: "traefik:latest"
     container_name: "traefik"
+    env_file:
+      - .env
     command:
       - "--api.dashboard=true"
       - "--providers.docker=true"
@@ -18,12 +20,12 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.rule=Host(`localhost`)"
-      - "traefik.http.routers.traefik.entrypoints=web"
+      - "traefik.http.routers.traefik.entrypoints=${ENTRYPOINTS}"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.middlewares=myauth"
       - "traefik.http.middlewares.myauth.basicauth.removeheader=true"
-      - "traefik.http.middlewares.myauth.basicauth.users=admin:$$2y$$05$$g/gXhF6YSMikWAYYnQcY1.EIhdigVouuyuK.CaqQBlZ5pP8Nsnoli"
-
+      - "traefik.http.middlewares.myauth.basicauth.users=admin:$$2y$$05$$reP17WErqC1z7uU5Kl0w2Og.EAkNHhAS/hXzCgLUylJ6fYTvZB5Sq"
+#      - "traefik.http.middlewares.myauth.basicauth.users=admin:$$2y$$05$$PhJTOtU898RK3GTBY7pMg.qHfp0HyA7FVhssCeNL9YodqubeYKpE2"
 
   whoami:
     image: containous/whoami
@@ -32,7 +34,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`localhost`) && PathPrefix(`/whoami`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+      - "traefik.http.routers.whoami.entrypoints=${ENTRYPOINTS}"
 
 networks:
   backend:

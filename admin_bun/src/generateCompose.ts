@@ -26,7 +26,7 @@ function addService(
     labels: [
       `traefik.enable=true`,
       `traefik.http.routers.${title}.rule=Host(\`localhost\`) && PathPrefix(\`/${title}\`)`,
-      `traefik.http.routers.${title}.entrypoints=\${ENTRYPOINT}`,
+      `traefik.http.routers.${title}.entrypoints=\${ENTRYPOINTS}`,
       `traefik.http.middlewares.${title}-stripprefix.stripprefix.prefixes=/${title}`,
       `traefik.http.routers.${title}.middlewares=${title}-stripprefix`,
       `traefik.http.services.${title}.loadbalancer.server.port=8080`

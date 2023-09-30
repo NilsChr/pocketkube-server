@@ -17,8 +17,8 @@ console.log('PASS', process.env || 'no password found');
 async function main() {
   await setupRootAdmin();
   const adminData = await pb.admins.authWithPassword(
-    "admin@admin.com",
-    "1234567890"
+    process.env.ROOTADMIN || '',
+    process.env.ROOTADMINPW || ''
   );
   const collections = await pb.collections.getFullList({ sort: "-created" });
   //console.log("Got Collections");
