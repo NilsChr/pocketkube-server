@@ -53,6 +53,11 @@ Stop  `npm run services:down`
     - [ ] Design UI
     - [ ] System Architecture
     - [ ] Use Traefik Basic Auth?
+    - [ ] Monitor Storage
+    - [ ] Monitor CPU
+    - [ ] Enable upload of webpage 
+
+
 
 
 #### In Progress
