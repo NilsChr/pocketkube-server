@@ -1,6 +1,12 @@
 # Pocketkube
 A small service for hosting several pocketbase instances in the same environment.
 
+### Linux server dependenices
+fswatch
+```
+sudo apt update  
+sudo apt install fswatch
+```
 
 ### Getting started
 Fill inn environment variables in .env
