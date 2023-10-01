@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the file to monitor
-file_to_watch="/Users/nils/Documents/workspace/pocketbase/pocketbaseTraefik/data/.compose/docker-compose.services.yml"
+file_to_watch="./data/.compose/docker-compose.services.yml"
 echo "Watching $file_to_watch"
 
 fswatch -0 "$file_to_watch" | while read -d "" change; do
