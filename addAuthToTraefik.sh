@@ -10,9 +10,6 @@ echo
 # hashed_password=$(htpasswd -nbB "$username" "$password" | sed -e s/\\$/\\$\\$/g)
 hashed_password=$(htpasswd -nbB "$username" "$password")
 
-# Replace the placeholder with the generated password in the template
-# sed "s|\${BASICAUTH}|$hashed_password|" docker-compose.traefikTemplate.yml > docker-compose.traefik.yml
-
 cat <<EOF > ./data/.traefik/userfile
 $hashed_password
 EOF

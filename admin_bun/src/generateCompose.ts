@@ -20,17 +20,18 @@ function addService(
       context: ".",
       dockerfile: "Dockerfile.pocketbase"
     },
-    ports: [`${port}:8080`],
+//    ports: [`${port}:8080`],
     networks: ["backend"],
     volumes: [`\${PROJECT}/data/${title}:/pb/pb_data`],
     labels: [
       `com.pocketkube`,
       `traefik.enable=true`,
-      `traefik.http.routers.${title}.rule=Host(\`localhost\`) && PathPrefix(\`/${title}\`)`,
+      `traefik.http.routers.${title}.rule=Host(\`\${HOST}\`) && PathPrefix(\`/${title}\`)`,
       `traefik.http.routers.${title}.entrypoints=\${ENTRYPOINTS}`,
-      `traefik.http.middlewares.${title}-stripprefix.stripprefix.prefixes=/${title}`,
       `traefik.http.routers.${title}.middlewares=${title}-stripprefix`,
-      `traefik.http.services.${title}.loadbalancer.server.port=8080`
+      `traefik.http.routers.${title}.tls.certresolver=letsencrypt`,
+      `traefik.http.middlewares.${title}-stripprefix.stripprefix.prefixes=/${title}`,
+      `traefik.http.services.${title}.loadbalancer.server.port=8080`,
     ]
   };
 }

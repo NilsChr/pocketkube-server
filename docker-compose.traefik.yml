@@ -11,30 +11,42 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=backend"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=nils.chr.bogen@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--log.level=DEBUG"
+
     ports:
       - "80:80"
+      - "443:443"
     networks:
       - backend
     volumes:
+      - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "${PROJECT}/data/.traefik:/users"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.traefik.rule=Host(`localhost`)"
+      - "traefik.http.routers.traefik.rule=Host(`${HOST}`)"
       - "traefik.http.routers.traefik.entrypoints=${ENTRYPOINTS}"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.middlewares=myauth"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.tls.certresolver=myresolver"
       - "traefik.http.middlewares.myauth.basicauth.removeheader=true"
       - "traefik.http.middlewares.myauth.basicauth.usersfile=/users/userfile"
 
   whoami:
-    image: containous/whoami
+    image: traefik/whoami
     networks:
       - backend
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`localhost`) && PathPrefix(`/whoami`)"
+      - "traefik.http.routers.whoami.rule=Host(`${HOST}`) && PathPrefix(`/whoami`)"
       - "traefik.http.routers.whoami.entrypoints=${ENTRYPOINTS}"
+      - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
+      - "traefik.http.services.whoami.loadbalancer.server.port=80"
 
 networks:
   backend:
