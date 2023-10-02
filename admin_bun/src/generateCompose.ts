@@ -20,9 +20,8 @@ function addService(
       context: ".",
       dockerfile: "Dockerfile.pocketbase"
     },
-//    ports: [`${port}:8080`],
     networks: ["backend"],
-    volumes: [`\${PROJECT}/data/${title}:/pb/pb_data`],
+    volumes: [`\${PROJECT}/data/${id}:/pb/pb_data`],
     labels: [
       `com.pocketkube`,
       `traefik.enable=true`,
