@@ -52,9 +52,7 @@ Stop  `npm run services:down`
 
 
 #### TODO ✓
-- [ ] How to handle duplicate app names?  ---- Don't generate ID -> use title as ID?
 - [ ] Start all services on startup  
-- [ ] Test deployment on linode
 - [ ] Create interface for managing apps
     - [ ] Design UI
     - [ ] System Architecture
@@ -83,6 +81,8 @@ Stop  `npm run services:down`
     - [x] Make volume folders named after ID instead of tile
     - [x] Ensure access to projects_data from admin
     - [x] Rename ID folder to DELETED_ID_TITLE
+- [x] How to handle duplicate app names?  ---- Don't generate ID -> use title as ID?
+- [x] Test deployment on linode
 
 
 #### Not going to implement yet
