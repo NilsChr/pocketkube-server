@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "stopp_containers.sh started"
+
 pkill -f "monitor"
 
 bun run traefik:down

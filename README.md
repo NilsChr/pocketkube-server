@@ -61,7 +61,7 @@ Stop  `npm run services:down`
     - [ ] Use Traefik Basic Auth?
     - [ ] Monitor Storage
     - [ ] Monitor CPU
-    - [ ] Enable upload of webpage 
+    - [ ] Enable upload of webpage -> target data/<app.id>/public
 
 
 
@@ -95,6 +95,10 @@ rm  ~/.docker/config.json
 Error  
 `open /Users/nils/.docker/buildx/current: permission denied`  
 Solution `sudo chown -R nils ~/.docker`  
+
+
+###### Cannot connect to docker daemon
+https://stackoverflow.com/questions/44084846/cannot-connect-to-the-docker-daemon-on-macos
 
 
 

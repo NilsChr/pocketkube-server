@@ -23,7 +23,7 @@ services:
   admin_service:
     restart: always
     build:
-      context: ./admin_bun
+      context: ./micro_services/admin_bun
       dockerfile: Dockerfile
     env_file:
       - .env
@@ -40,7 +40,6 @@ services:
       - "traefik.http.routers.admin_service.middlewares=admin_service-stripprefix"  # Apply the middleware
       - "traefik.http.services.admin_service.loadbalancer.server.port=8081"  # Specify the backend port
       - "traefik.http.routers.admin_service.tls.certresolver=letsencrypt"
-
     depends_on:
       - admin
 

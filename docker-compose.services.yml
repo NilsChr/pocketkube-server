@@ -1,4 +1,23 @@
 version: '3.3'
-services: {}
+services:
+  3zhivf2l0ty2mvx:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.pocketbase
+    networks:
+      - backend
+    volumes:
+      - ${PROJECT}/data/3zhivf2l0ty2mvx/data:/pb/pb_data
+      - ${PROJECT}/data/3zhivf2l0ty2mvx/public:/pb/pb_public
+    labels:
+      - com.pocketkube
+      - traefik.enable=true
+      - traefik.http.routers.app1.rule=Host(`${HOST}`) && PathPrefix(`/app1`)
+      - traefik.http.routers.app1.entrypoints=${ENTRYPOINTS}
+      - traefik.http.routers.app1.middlewares=app1-stripprefix
+      - traefik.http.routers.app1.tls.certresolver=letsencrypt
+      - traefik.http.middlewares.app1-stripprefix.stripprefix.prefixes=/app1
+      - traefik.http.services.app1.loadbalancer.server.port=8080
 networks:
   backend: null

@@ -1,4 +1,8 @@
 #!/bin/bash
+echo "monitor.sh started"
+
+# Get the script's directory
+script_dir=$(dirname "$0")
 
 # Define the file to monitor
 file_to_watch="./data/.compose/docker-compose.services.yml"
