@@ -60,6 +60,12 @@ Stop  `npm run services:down`
     - [ ] Monitor Storage
     - [ ] Monitor CPU
     - [ ] Enable upload of webpage -> target data/<app.id>/public
+- [ ] Add micro service for fetching resource status per app
+    `docker stats --no-stream --format "table {{.Container}}\t{{.CPUPerc}}"`
+    `docker stats --no-stream --format "table {{.Container}}\t{{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"` <--- This lists all
+    - [ ] Storage
+    - [ ] CPU
+    - [ ] RAM
 
 
 

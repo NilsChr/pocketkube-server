@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+  admin_resources:
+    restart: always
+    build:
+      context: ./micro_services/resource_api
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    networks:
+      - backend
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.admin_resources.rule=Host(`${HOST}`) && PathPrefix(`/admin_resources`)"  # Match the path prefix /admin
+      - "traefik.http.routers.admin_resources.entrypoints=${ENTRYPOINTS}"
+      - "traefik.http.middlewares.admin_resources-stripprefix.stripprefix.prefixes=/admin_resources"  # Strip /admin prefix
+      - "traefik.http.routers.admin_resources.middlewares=admin_resources-stripprefix"  # Apply the middleware
+      - "traefik.http.services.admin_resources.loadbalancer.server.port=8080"  # Specify the backend port
+#      - "traefik.http.routers.admin_resources.tls.certresolver=letsencrypt"
+
+  connection_test:
+    restart: always
+    build:
+      context: ./micro_services/connection_test
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    networks:
+      - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.connection_test.rule=Host(`${HOST}`) && PathPrefix(`/connection_test`)"  # Match the path prefix /admin
+      - "traefik.http.routers.connection_test.entrypoints=${ENTRYPOINTS}"
+      - "traefik.http.middlewares.connection_test-stripprefix.stripprefix.prefixes=/connection_test"  # Strip /admin prefix
+      - "traefik.http.routers.connection_test.middlewares=connection_test-stripprefix"  # Apply the middleware
+      - "traefik.http.services.connection_test.loadbalancer.server.port=8080"  # Specify the backend port
+#      - "traefik.http.routers.admin_resources.tls.certresolver=letsencrypt"
+
+networks:
+  backend: null

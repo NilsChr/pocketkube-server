@@ -7,3 +7,4 @@ pkill -f "monitor"
 bun run traefik:down
 bun run admin:down
 bun run services:down
+bun run micro_services:down

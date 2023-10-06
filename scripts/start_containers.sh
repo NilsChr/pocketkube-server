@@ -35,6 +35,7 @@ pkill -f "monitor"
 echo "running bun commands"
 bun run traefik
 bun run admin
+bun run micro_services
 # bun run services
 
 # cd ./scripts
