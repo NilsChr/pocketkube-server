@@ -31,13 +31,15 @@ fi
 # echo "File does not exist. Running the script..."
 
 pkill -f "monitor"
+"$script_dir/monitor.sh" &
+
 
 echo "running bun commands"
 bun run traefik
 bun run admin
-bun run micro_services
+bun run micro_services &
 # bun run services
 
 # cd ./scripts
 
-"$script_dir/monitor.sh" &
+# "$script_dir/monitor.sh" &

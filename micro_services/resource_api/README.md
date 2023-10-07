@@ -1,5 +1,10 @@
 # resource_api
 
+Returns runtime stats about the running docker containers on the environment
+
+
+
+
 To install dependencies:
 
 ```bash

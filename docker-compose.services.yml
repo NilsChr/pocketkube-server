@@ -1,6 +1,6 @@
 version: '3.3'
 services:
-  3zhivf2l0ty2mvx:
+  ef0m7qml9dl4k3u:
     restart: always
     build:
       context: .
@@ -8,16 +8,33 @@ services:
     networks:
       - backend
     volumes:
-      - ${PROJECT}/data/3zhivf2l0ty2mvx/data:/pb/pb_data
-      - ${PROJECT}/data/3zhivf2l0ty2mvx/public:/pb/pb_public
+      - ${PROJECT}/data/ef0m7qml9dl4k3u/data:/pb/pb_data
+      - ${PROJECT}/data/ef0m7qml9dl4k3u/public:/pb/pb_public
     labels:
       - com.pocketkube
       - traefik.enable=true
-      - traefik.http.routers.app1.rule=Host(`${HOST}`) && PathPrefix(`/app1`)
-      - traefik.http.routers.app1.entrypoints=${ENTRYPOINTS}
-      - traefik.http.routers.app1.middlewares=app1-stripprefix
-      - traefik.http.routers.app1.tls.certresolver=letsencrypt
-      - traefik.http.middlewares.app1-stripprefix.stripprefix.prefixes=/app1
-      - traefik.http.services.app1.loadbalancer.server.port=8080
+      - traefik.http.routers.kris.rule=Host(`${HOST}`) && PathPrefix(`/kris`)
+      - traefik.http.routers.kris.entrypoints=${ENTRYPOINTS}
+      - traefik.http.routers.kris.middlewares=kris-stripprefix
+      - traefik.http.middlewares.kris-stripprefix.stripprefix.prefixes=/kris
+      - traefik.http.services.kris.loadbalancer.server.port=8080
+  66a6c90qdjk80gt:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.pocketbase
+    networks:
+      - backend
+    volumes:
+      - ${PROJECT}/data/66a6c90qdjk80gt/data:/pb/pb_data
+      - ${PROJECT}/data/66a6c90qdjk80gt/public:/pb/pb_public
+    labels:
+      - com.pocketkube
+      - traefik.enable=true
+      - traefik.http.routers.k2.rule=Host(`${HOST}`) && PathPrefix(`/k2`)
+      - traefik.http.routers.k2.entrypoints=${ENTRYPOINTS}
+      - traefik.http.routers.k2.middlewares=k2-stripprefix
+      - traefik.http.middlewares.k2-stripprefix.stripprefix.prefixes=/k2
+      - traefik.http.services.k2.loadbalancer.server.port=8080
 networks:
   backend: null

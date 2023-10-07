@@ -13,8 +13,11 @@ setInterval(async function() {
   console.log('testing');
 
   try {
-    const res = await fetch('http://admin_resources');
-    console.log(res);
+    const res = await fetch('http://admin_resources:8080');
+    console.log(res.status);
+    const blob = await res.blob();
+
+    console.log(await blob.json());
   } catch(e) {
     console.log(e)
   }

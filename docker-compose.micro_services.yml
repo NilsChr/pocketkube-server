@@ -11,6 +11,7 @@ services:
       - backend
     volumes: 
       - /var/run/docker.sock:/var/run/docker.sock
+      - ${PROJECT}/data/:/pb/
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.admin_resources.rule=Host(`${HOST}`) && PathPrefix(`/admin_resources`)"  # Match the path prefix /admin

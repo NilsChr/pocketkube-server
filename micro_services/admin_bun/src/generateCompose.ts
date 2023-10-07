@@ -28,7 +28,7 @@ function addService(
       `traefik.http.routers.${title}.rule=Host(\`\${HOST}\`) && PathPrefix(\`/${title}\`)`,
       `traefik.http.routers.${title}.entrypoints=\${ENTRYPOINTS}`,
       `traefik.http.routers.${title}.middlewares=${title}-stripprefix`,
-      `traefik.http.routers.${title}.tls.certresolver=letsencrypt`,
+//      `traefik.http.routers.${title}.tls.certresolver=letsencrypt`,
       `traefik.http.middlewares.${title}-stripprefix.stripprefix.prefixes=/${title}`,
       `traefik.http.services.${title}.loadbalancer.server.port=8080`,
     ]
