@@ -60,14 +60,6 @@ Stop  `npm run services:down`
     - [ ] Monitor Storage
     - [ ] Monitor CPU
     - [ ] Enable upload of webpage -> target data/<app.id>/public
-- [ ] Add micro service for fetching resource status per app
-    `docker stats --no-stream --format "table {{.Container}}\t{{.CPUPerc}}"`
-    `docker stats --no-stream --format "table {{.Container}}\t{{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"` <--- This lists all
-    - [ ] Storage
-    - [ ] CPU
-    - [ ] RAM
-
-
 
 
 #### In Progress
@@ -89,7 +81,12 @@ Stop  `npm run services:down`
     - [x] Rename ID folder to DELETED_ID_TITLE
 - [x] How to handle duplicate app names?  ---- Don't generate ID -> use title as ID?
 - [x] Test deployment on linode
-
+- [x] Add micro service for fetching resource status per app
+    `docker stats --no-stream --format "table {{.Container}}\t{{.CPUPerc}}"`
+    `docker stats --no-stream --format "table {{.Container}}\t{{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"` <--- This lists all
+    - [x] Storage
+    - [x] CPU
+    - [x] RAM
 
 #### Not going to implement yet
 - [ ] Minikube?
