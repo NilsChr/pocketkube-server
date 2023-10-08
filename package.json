@@ -1,7 +1,7 @@
 {
   "name": "pocketbasetraefik",
   "scripts": {
-    "dev": "NODE_ENV=development ./scripts/start_containers.sh",
+    "dev": "BUN_ENV=development ./scripts/start_containers.sh",
     "stop": "./scripts/stopp_containers.sh",
     "traefik": "docker-compose -f docker-compose.traefik.yml up -d --build",
     "traefik:down": "docker-compose -f docker-compose.traefik.yml down",

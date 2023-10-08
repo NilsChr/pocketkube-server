@@ -8,6 +8,11 @@ sudo apt update
 sudo apt install fswatch
 ```
 
+docker
+```
+TODO: add install
+```
+
 ### Getting started
 Fill inn environment variables in .env
 
@@ -37,6 +42,7 @@ Generate a username and password hashed wihth bcrypt. Output the admin:hashed pa
 `echo $(htpasswd -nbB USER "PASS") | sed -e s/\\$/\\$\\$/g`
 
 #### How to run
+Start in development mode: `bun run dev`
 
 ##### Traefik
 Start `npm run traefik`  
@@ -49,6 +55,36 @@ Stop  `npm run admin:down`
 ##### Services
 Start `npm run services`  
 Stop  `npm run services:down`  
+
+
+## PocketKube Components
+
+### Linux Ubuntu Host
+This is the machine that will run all your backend servers.
+
+#### Traefik
+Traefik handles all the incoming network traffic and acts as a reverse proxy to the other pocketbase instances.  
+Traefik automatically picks up new Docker Containers which are running on the host machine.
+
+#### Docker
+Every pocketbase instance is launched inside it's own separate Docker Container. 
+
+### Static Services
+PocketKube provides a set of services out of the box, these are
+
+#### Admin Pocketbase
+This is the admin pocketbase which lists all your apps. To add a new app simply add a new record to the "backends" collection
+
+#### Admin Service
+This micro service listens for updates from the `Admin Pocketbase` service.  
+If a change occurs, this service will rebuild a dynamic `docker-compose.services.yml` file.  
+
+#### Monitoring script
+This is a script which runs on the host machine and listens for changes on the `docker-compose.services.yml` file.  
+If a change occurs this script will run `docker-compose up` 
+
+#### Admin Resources API
+This micro service can get docker container resource information from the host and exposes this as an API.  
 
 
 #### TODO ✓
