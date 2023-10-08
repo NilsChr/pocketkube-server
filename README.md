@@ -24,7 +24,7 @@ Go to host/<app_title>/_/ to access Pocketbase dashboard.
 
 
 
-![](./architecture.png)
+![](./architecture2.png)
 
 
 ### Traefik docs
