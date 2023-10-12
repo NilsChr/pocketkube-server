@@ -90,11 +90,11 @@ This micro service can get docker container resource information from the host a
 #### TODO ✓
 - [ ] Start all services on startup  
 - [ ] Create interface for managing apps
-    - [ ] Design UI
+    - [x] Design UI
     - [ ] System Architecture
     - [ ] Use Traefik Basic Auth?
-    - [ ] Monitor Storage
-    - [ ] Monitor CPU
+    - [x] Monitor Storage
+    - [x] Monitor CPU
     - [ ] Enable upload of webpage -> target data/<app.id>/public
 
 
@@ -139,6 +139,16 @@ Solution `sudo chown -R nils ~/.docker`
 ###### Cannot connect to docker daemon
 https://stackoverflow.com/questions/44084846/cannot-connect-to-the-docker-daemon-on-macos
 
+
+###### load metadata for docker.io/library/alpine:latest  
+`sudo nano ~/.docker/config.json`
+Changing
+
+"credsStore": "desktop"
+
+to
+
+"credStore": "desktop"
 
 
 ### Future features

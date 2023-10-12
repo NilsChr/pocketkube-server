@@ -1,5 +1,5 @@
 console.log("Hello via Bun!");
-
+console.log("Host env", process.env.HOST);
 
 Bun.serve({
   port: 8080,

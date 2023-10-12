@@ -46,10 +46,10 @@ const backendsSchema = {
     }
   ],
   indexes: [],
-  listRule: null,
-  viewRule: null,
-  createRule: null,
-  updateRule: null,
+  listRule: "",
+  viewRule: "",
+  createRule: "",
+  updateRule: "",
   deleteRule: null,
   options: {}
 };

@@ -1,5 +1,23 @@
 version: '3.3'
 services:
+  kc81cxas6pufkng:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.pocketbase
+    networks:
+      - backend
+    volumes:
+      - ${PROJECT}/data/kc81cxas6pufkng/data:/pb/pb_data
+      - ${PROJECT}/data/kc81cxas6pufkng/public:/pb/pb_public
+    labels:
+      - com.pocketkube
+      - traefik.enable=true
+      - traefik.http.routers.nils.rule=Host(`${HOST}`) && PathPrefix(`/nils`)
+      - traefik.http.routers.nils.entrypoints=${ENTRYPOINTS}
+      - traefik.http.routers.nils.middlewares=nils-stripprefix
+      - traefik.http.middlewares.nils-stripprefix.stripprefix.prefixes=/nils
+      - traefik.http.services.nils.loadbalancer.server.port=8080
   ef0m7qml9dl4k3u:
     restart: always
     build:
