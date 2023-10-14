@@ -1,5 +1,26 @@
 version: '3.3'
 services:
+  1ks8mousrwm02mv:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.pocketbase
+    networks:
+      - backend
+    volumes:
+      - ${PROJECT}/data/1ks8mousrwm02mv/data:/pb/pb_data
+      - ${PROJECT}/data/1ks8mousrwm02mv/public:/pb/pb_public
+    labels:
+      - com.pocketkube
+      - traefik.enable=true
+      - >-
+        traefik.http.routers.troubadour.rule=Host(`${HOST}`) &&
+        PathPrefix(`/troubadour`)
+      - traefik.http.routers.troubadour.entrypoints=${ENTRYPOINTS}
+      - traefik.http.routers.troubadour.middlewares=troubadour-stripprefix
+      - >-
+        traefik.http.middlewares.troubadour-stripprefix.stripprefix.prefixes=/troubadour
+      - traefik.http.services.troubadour.loadbalancer.server.port=8080
   kc81cxas6pufkng:
     restart: always
     build:

@@ -88,6 +88,7 @@ This micro service can get docker container resource information from the host a
 
 
 #### TODO ✓
+- [ ] Add CORS headers
 - [ ] Start all services on startup  
 - [ ] Create interface for managing apps
     - [x] Design UI
