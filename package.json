@@ -3,13 +3,6 @@
   "scripts": {
     "dev": "BUN_ENV=development ./scripts/start_containers.sh",
     "stop": "./scripts/stopp_containers.sh",
-    "traefik": "docker-compose -f docker-compose.traefik.yml up -d --build",
-    "traefik:down": "docker-compose -f docker-compose.traefik.yml down",
-    "admin": "docker-compose -f docker-compose.admin.yml up -d --build",
-    "admin:down": "docker-compose -f docker-compose.admin.yml down",
-    "services": "docker-compose -f docker-compose.services.yml up -d --build",
-    "services:down": "docker-compose -f docker-compose.services.yml down",
-    "micro_services": "docker-compose -f docker-compose.micro_services.yml up -d --build",
-    "micro_services:down": "docker-compose -f docker-compose.micro_services.yml down"
+    "start": "PK_ENV=production ./scripts/start_containers2.sh"
   }
 }

@@ -15,10 +15,10 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.admin.rule=Host(`${HOST}`) && PathPrefix(`/admin`)"  # Match the path prefix /admin
       - "traefik.http.routers.admin.entrypoints=${ENTRYPOINTS}"
-      - "traefik.http.middlewares.admin-stripprefix.stripprefix.prefixes=/admin"  # Strip /admin prefix
       - "traefik.http.routers.admin.middlewares=admin-stripprefix"  # Apply the middleware
-      - "traefik.http.services.admin.loadbalancer.server.port=8080"  # Specify the backend port
       - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
+      - "traefik.http.middlewares.admin-stripprefix.stripprefix.prefixes=/admin"  # Strip /admin prefix
+      - "traefik.http.services.admin.loadbalancer.server.port=8080"  # Specify the backend port
 
   admin_service:
     restart: always
@@ -27,6 +27,8 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
+    environment:
+      - PK_ENV=${PK_ENV}
     networks:
       - backend
     volumes: 
@@ -36,10 +38,10 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.admin_service.rule=Host(`${HOST}`) && PathPrefix(`/admin_service`)"  # Match the path prefix /admin
       - "traefik.http.routers.admin_service.entrypoints=${ENTRYPOINTS}"
-      - "traefik.http.middlewares.admin_service-stripprefix.stripprefix.prefixes=/admin_service"  # Strip /admin prefix
       - "traefik.http.routers.admin_service.middlewares=admin_service-stripprefix"  # Apply the middleware
-      - "traefik.http.services.admin_service.loadbalancer.server.port=8081"  # Specify the backend port
       - "traefik.http.routers.admin_service.tls.certresolver=letsencrypt"
+      - "traefik.http.middlewares.admin_service-stripprefix.stripprefix.prefixes=/admin_service"  # Strip /admin prefix
+      - "traefik.http.services.admin_service.loadbalancer.server.port=8081"  # Specify the backend port
     depends_on:
       - admin
 

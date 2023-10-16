@@ -2,8 +2,6 @@
 
 echo "start_containers.sh started"
 
-#./addAuthtoTraefik.sh
-
 # Get the script's directory
 script_dir=$(dirname "$0")
 
@@ -25,21 +23,23 @@ if [ ! -f "$file_path" ]; then
         echo "Folder created: $folder_path"
     fi 
 
-
     "$script_dir/addAuthtoTraefik.sh"
 fi 
-# echo "File does not exist. Running the script..."
 
 pkill -f "monitor"
 "$script_dir/monitor.sh" &
 
+# Start the Traefik service and micro_services
+if [[ "$PK_ENV" == "production" ]]; then
+    docker-compose -f docker-compose.traefik.https.yml up -d --build
+    docker-compose -f docker-compose.micro_services.https.yml up -d --build
+else
+    docker-compose -f docker-compose.traefik.yml up -d --build
+    docker-compose -f docker-compose.micro_services.yml up -d --build
+fi
 
-echo "running bun commands"
-bun run traefik
-bun run admin
-bun run micro_services &
-# bun run services
+# Start the admin service
+docker-compose -f docker-compose.admin.yml up -d --build
 
-# cd ./scripts
-
-# "$script_dir/monitor.sh" &
+# Start the services
+docker-compose -f docker-compose.services.yml up -d --build

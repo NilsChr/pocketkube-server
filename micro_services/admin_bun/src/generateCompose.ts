@@ -14,6 +14,23 @@ function addService(
   entrypoint: "web" | "websecure",
   port: number
 ) {
+
+  const labels = [
+    `com.pocketkube`,
+    `traefik.enable=true`,
+    `traefik.http.routers.${title}.rule=Host(\`\${HOST}\`) && PathPrefix(\`/${title}\`)`,
+    `traefik.http.routers.${title}.entrypoints=\${ENTRYPOINTS}`,
+    `traefik.http.routers.${title}.middlewares=${title}-stripprefix`,
+//      `traefik.http.routers.${title}.tls.certresolver=letsencrypt`,
+    `traefik.http.middlewares.${title}-stripprefix.stripprefix.prefixes=/${title}`,
+    `traefik.http.services.${title}.loadbalancer.server.port=8080`,
+  ]
+
+  if(process.env.PK_ENV === "production") {
+    labels.push(`traefik.http.routers.${title}.tls.certresolver=letsencrypt`);
+  }
+  // TODO ADD letsencrypt
+
   return {
     restart: "always",
     build: {
@@ -22,16 +39,7 @@ function addService(
     },
     networks: ["backend"],
     volumes: [`\${PROJECT}/data/${id}/data:/pb/pb_data`,`\${PROJECT}/data/${id}/public:/pb/pb_public`],
-    labels: [
-      `com.pocketkube`,
-      `traefik.enable=true`,
-      `traefik.http.routers.${title}.rule=Host(\`\${HOST}\`) && PathPrefix(\`/${title}\`)`,
-      `traefik.http.routers.${title}.entrypoints=\${ENTRYPOINTS}`,
-      `traefik.http.routers.${title}.middlewares=${title}-stripprefix`,
-//      `traefik.http.routers.${title}.tls.certresolver=letsencrypt`,
-      `traefik.http.middlewares.${title}-stripprefix.stripprefix.prefixes=/${title}`,
-      `traefik.http.services.${title}.loadbalancer.server.port=8080`,
-    ]
+    labels: labels
   };
 }
 
@@ -40,6 +48,7 @@ export default function generateCompose(apps: {id: string, title:string}[]): any
   let port = 9000;
   for (let app of apps) {
     template["services"][app.id] = addService(app.id, app.title, "web", port++);
+
   }
 
   return template;

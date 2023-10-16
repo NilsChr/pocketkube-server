@@ -13,6 +13,7 @@ const pb_url = "http://admin:8080";
 const pb = new PocketBase(pb_url);
 
 console.log("PASS", process.env || "no password found");
+console.log("PK_ENV", process.env.PK_ENV);
 
 const backendsSchema = {
   id: "ob2i2yjehrsu9nt",
