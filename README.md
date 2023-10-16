@@ -88,13 +88,12 @@ This micro service can get docker container resource information from the host a
 
 
 #### TODO ✓
-- [ ] Figure out how to add HTTPS in production but not in dev
 - [ ] Add CORS headers
 - [ ] Start all services on startup  
 - [ ] Create interface for managing apps
     - [x] Design UI
     - [ ] System Architecture
-    - [ ] Use Traefik Basic Auth?
+    - [ ] Added Pocketbase Auth for admin
     - [x] Monitor Storage
     - [x] Monitor CPU
     - [ ] Enable upload of webpage -> target data/<app.id>/public
@@ -125,6 +124,9 @@ This micro service can get docker container resource information from the host a
     - [x] Storage
     - [x] CPU
     - [x] RAM
+- [x] Figure out how to add HTTPS in production but not in dev
+
+
 
 #### Not going to implement yet
 - [ ] Minikube?
