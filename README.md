@@ -43,19 +43,7 @@ Generate a username and password hashed wihth bcrypt. Output the admin:hashed pa
 
 #### How to run
 Start in development mode: `bun run dev`
-
-##### Traefik
-Start `npm run traefik`  
-Stop  `npm run traefik:down`  
-
-##### Admin
-Start `npm run admin`  
-Stop  `npm run admin:down`  
-
-##### Services
-Start `npm run services`  
-Stop  `npm run services:down`  
-
+Stop all containers `bun run stop`
 
 ## PocketKube Components
 
