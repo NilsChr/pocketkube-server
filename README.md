@@ -42,7 +42,7 @@ Generate a username and password hashed wihth bcrypt. Output the admin:hashed pa
 `echo $(htpasswd -nbB USER "PASS") | sed -e s/\\$/\\$\\$/g`
 
 #### How to run
-Start in development mode: `bun run dev`
+Start in development mode: `bun run dev`  
 Stop all containers `bun run stop`
 
 ## PocketKube Components
