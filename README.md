@@ -17,7 +17,7 @@ TODO: add install
 Fill inn environment variables in .env
 
 cd into project folder and run:  
-`chmod +x ./addAuthToTraefik.sh && chmod +x ./stop_containers.sh && chmod +x ./start_containers.sh && chmod +x ./monitor.sh`  
+`chmod +x ./scripts/addAuthToTraefik.sh && chmod +x ./scripts/stop_containers.sh && chmod +x ./scripts/start_containers.sh && chmod +x ./scripts/monitor.sh`  
 
 #### Build and start containers
 `./start_containers.sh`  
