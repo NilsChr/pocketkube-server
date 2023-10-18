@@ -35,7 +35,7 @@ services:
       - "traefik.http.routers.connection_test.rule=Host(`${HOST}`) && PathPrefix(`/connection_test`)"  # Match the path prefix /admin
       - "traefik.http.routers.connection_test.entrypoints=${ENTRYPOINTS}"
       - "traefik.http.routers.connection_test.middlewares=connection_test-stripprefix"  # Apply the middleware
-      - "traefik.http.routers.admin_resources.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.connection_test.tls.certresolver=letsencrypt"
       - "traefik.http.middlewares.connection_test-stripprefix.stripprefix.prefixes=/connection_test"  # Strip /admin prefix
       - "traefik.http.services.connection_test.loadbalancer.server.port=8080"  # Specify the backend port
 

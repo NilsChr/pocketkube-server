@@ -1,8 +1,8 @@
 {
   "name": "pocketbasetraefik",
   "scripts": {
-    "dev": "BUN_ENV=development ./scripts/start_containers.sh",
+    "dev": "PK_ENV=development ./scripts/start_containers.sh",
     "stop": "./scripts/stopp_containers.sh",
-    "start": "PK_ENV=production ./scripts/start_containers2.sh"
+    "start": "PK_ENV=production ./scripts/start_containers.sh"
   }
 }

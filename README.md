@@ -2,6 +2,9 @@
 A small service for hosting several pocketbase instances in the same environment.
 
 ### Linux server dependenices
+! DEPRECATED - fswatch does not work as intended on linux. 
+
+
 fswatch
 ```
 sudo apt update  
@@ -17,7 +20,7 @@ TODO: add install
 Fill inn environment variables in .env
 
 cd into project folder and run:  
-`chmod +x ./scripts/addAuthToTraefik.sh && chmod +x ./scripts/stop_containers.sh && chmod +x ./scripts/start_containers.sh && chmod +x ./scripts/monitor.sh`  
+`chmod +x ./scripts/addAuthToTraefik.sh && chmod +x ./scripts/stopp_containers.sh && chmod +x ./scripts/start_containers.sh && chmod +x ./scripts/monitor.sh`  
 
 #### Build and start containers
 `./start_containers.sh`  
@@ -80,8 +83,8 @@ This micro service can get docker container resource information from the host a
 - [ ] Start all services on startup  
 - [ ] Create interface for managing apps
     - [x] Design UI
-    - [ ] System Architecture
-    - [ ] Added Pocketbase Auth for admin
+    - [x] System Architecture
+    - [x] Added Pocketbase Auth for admin
     - [x] Monitor Storage
     - [x] Monitor CPU
     - [ ] Enable upload of webpage -> target data/<app.id>/public

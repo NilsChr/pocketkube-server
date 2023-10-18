@@ -16,7 +16,7 @@ services:
       - "traefik.http.routers.admin.rule=Host(`${HOST}`) && PathPrefix(`/admin`)"  # Match the path prefix /admin
       - "traefik.http.routers.admin.entrypoints=${ENTRYPOINTS}"
       - "traefik.http.routers.admin.middlewares=admin-stripprefix"  # Apply the middleware
-      - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.admin.tls.certresolver=letsencrypt"
       - "traefik.http.middlewares.admin-stripprefix.stripprefix.prefixes=/admin"  # Strip /admin prefix
       - "traefik.http.services.admin.loadbalancer.server.port=8080"  # Specify the backend port
 

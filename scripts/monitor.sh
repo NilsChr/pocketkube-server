@@ -1,14 +1,12 @@
 #!/bin/bash
 echo "monitor.sh started"
 
-# Get the script's directory
-script_dir=$(dirname "$0")
-
 # Define the file to monitor
 file_to_watch="./data/.compose/docker-compose.services.yml"
 echo "Watching $file_to_watch"
 
-fswatch -0 "$file_to_watch" | while read -d "" change; do
+# fswatch -0 "$file_to_watch" | while read -d "" change; do   <- macOS
+while inotifywait -e modify "$file_to_watch"; do  
     echo "File $file_to_watch has been modified."
     cp $file_to_watch docker-compose.services.yml
 
